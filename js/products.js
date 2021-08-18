@@ -1,8 +1,40 @@
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
-//var currentProductsArray = [];
+const ORDER_ASC_BY_NAME = "AZ";
+const ORDER_DESC_BY_NAME = "ZA";
+const ORDER_BY_PROD_COUNT = "Cant.";
+var currentProductsArray = [];
+var currentSortCriteria = undefined;
 
+function sortProducts(criteria, array){
+    let result = [];
+    if (criteria === ORDER_ASC_BY_NAME)
+    {
+        result = array.sort(function(a, b) {
+            if ( a.name < b.name ){ return -1; }
+            if ( a.name > b.name ){ return 1; }
+            return 0;
+        });
+    }else if (criteria === ORDER_DESC_BY_NAME){
+        result = array.sort(function(a, b) {
+            if ( a.name > b.name ){ return -1; }
+            if ( a.name < b.name ){ return 1; }
+            return 0;
+        });
+    }/*else if (criteria === ORDER_BY_PROD_COUNT){
+        result = array.sort(function(a, b) {
+            let aCount = parseInt(a.productCount);
+            let bCount = parseInt(b.productCount);
+
+            if ( aCount > bCount ){ return -1; }
+            if ( aCount < bCount ){ return 1; }
+            return 0;
+        });
+    }*/
+
+    return result;
+}
 
 function showProductsList(ProductsArray){
 
@@ -28,6 +60,7 @@ function showProductsList(ProductsArray){
                 </div>
             </a>
             `
+           
             //agrego el codigo que quiero que se muestre en el HTML
             //Muestra los productos en una lista 
             //imagen - Nombre y descripcion
@@ -39,10 +72,34 @@ function showProductsList(ProductsArray){
     }
 
 
+    function sortAndShowProducts(sortCriteria, productsArray){
+        currentSortCriteria = sortCriteria;
+    
+        if(productsArray != undefined){
+            currentProductsArray = productsArray;
+        }
+    
+        currentProductsArray = sortProducts(currentSortCriteria, currentProductsArray);
+    
+        //Muestro las categorías ordenadas
+        showProductsList(currentProductsArray);
+    }
+
 document.addEventListener("DOMContentLoaded", function (e) {
     getJSONData(PRODUCTS_URL).then(function(resultObj){
         if (resultObj.status === "ok"){
-            showProductsList(resultObj.data);
+            sortAndShowProducts(ORDER_ASC_BY_NAME,resultObj.data)
         }
-    })
+    });
 });
+    document.getElementById("sortAsc").addEventListener("click", function(){
+        sortAndShowProducts(ORDER_ASC_BY_NAME);
+    });
+
+    document.getElementById("sortDesc").addEventListener("click", function(){
+        sortAndShowProducts(ORDER_DESC_BY_NAME);
+    });
+
+    document.getElementById("sortByCount").addEventListener("click", function(){
+        sortAndShowProducts(ORDER_BY_PROD_COUNT);
+    });
