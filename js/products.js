@@ -44,8 +44,9 @@ function showProductsList(ProductsArray){
         //hago el for para recorrer el arreglo de productos
         let producto = ProductsArray[i];
         //Le asigno a producto cada elemento del arreglo de productos
+        /*<a href="product-info.html" class="list-group-item list-group-item-action"> </a>*/
             htmlContentToAppend += `
-            <a href="product-info.html" class="list-group-item list-group-item-action">
+            
                 <div class="row">
                     <div class="col-3">
                         <img src="` + producto.imgSrc + `" alt="` + producto.description + `" class="img-thumbnail">
@@ -58,7 +59,7 @@ function showProductsList(ProductsArray){
                         <p class="mb-1">` + producto.description + `</p>
                     </div>
                 </div>
-            </a>
+            
             `
            
             //agrego el codigo que quiero que se muestre en el HTML
