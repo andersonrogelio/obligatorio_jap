@@ -93,7 +93,7 @@ function showProductsList(){
             //agrego el codigo que quiero que se muestre en el HTML
             //Muestra los productos en una lista 
             //imagen - Nombre y descripcion
-            //<small class="text-muted">`+ producto.currency +`: ` + producto.cost + `</small>
+            
         
           }
         }
@@ -150,6 +150,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         maxPrecio = undefined;
 
         showProductsList();
+        sortAndShowProducts(ORDER_ASC_BY_NAME);
     });
     document.getElementById("rangeFilterPrice").addEventListener("click", function(){
         //Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad

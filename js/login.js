@@ -1,6 +1,6 @@
 var NOMBRE_DEL_USUARIO; //creacion de variable que guardara el usuario introduccido
 const myForm = document.getElementById("myForm"); //capturamos el formulario para poder manipularlo 
-myForm.addEventListener("submit", function(e){//evento submit
+myForm.addEventListener("submit", function(e){//agregamos un detctor del evento submit para poder manipular la informacion del form
 e.preventDefault();//interrupccion del evento submit
 NOMBRE_DEL_USUARIO = document.getElementById("nombre_del_usuario").value; //cuardado de usuario introduccido
 localStorage.setItem("user",NOMBRE_DEL_USUARIO);//guardado local del nombre del ususario
