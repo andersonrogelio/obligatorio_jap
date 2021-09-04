@@ -28,7 +28,7 @@
 	<div class="limiter">
 		<div class="container-login100" >
 			<div class="wrap-login100 p-t-190 p-b-30">
-				<form class="login100-form validate-form" action="principal.html" >
+				<form class="login100-form validate-form" id="myForm" action="principal.html" > <!-- action="principal.html"  onsubmit="js/login.js"-->
 					<div class="login100-form-avatar">
 						<img src="images/descarga.png" alt="AVATAR">
 					</div>
@@ -38,7 +38,7 @@
 					</span>
 
 					<div class="wrap-input100 validate-input m-b-10" data-validate = "Username is required">
-						<input class="input100" type="text" name="username" placeholder="Username" required>
+						<input class="input100" type="text" name="username" id="nombre_del_usuario" placeholder="Username" required>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-user"></i>
@@ -46,7 +46,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-10" data-validate = "Password is required">
-						<input class="input100" type="password" name="pass" placeholder="Password" required>
+						<input class="input100" type="password" name="pass" id="" placeholder="Password" required>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock"></i>
@@ -54,7 +54,7 @@
 					</div>
 
 					<div class="container-login100-form-btn p-t-10">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" id="Inicio_Sesion" type="submit" >  <!--button   -->
 							Login
 						</button>
 					</div>
@@ -88,6 +88,7 @@
 	<script src="vendor/select2/select2.min.js"></script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
+	<script src="js/login.js"></script>
 
 </body>
 </html>

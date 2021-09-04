@@ -3,9 +3,13 @@
 //elementos HTML presentes.
 const ORDER_ASC_BY_NAME = "AZ";
 const ORDER_DESC_BY_NAME = "ZA";
-const ORDER_BY_PROD_COUNT = "Cant.";
+const ORDER_ASC_BY_PRICE = "Menormayor";
+const ORDER_DESC_BY_PRICE = "Mayormenor";
+const ORDER_RELEVANCIA = "CantidadVendidos";
 var currentProductsArray = [];
 var currentSortCriteria = undefined;
+var minPrecio = undefined;
+var maxPrecio = undefined;
 
 function sortProducts(criteria, array){
     let result = [];
@@ -22,29 +26,53 @@ function sortProducts(criteria, array){
             if ( a.name < b.name ){ return 1; }
             return 0;
         });
-    }/*else if (criteria === ORDER_BY_PROD_COUNT){
+    }else if (criteria === ORDER_ASC_BY_PRICE){
         result = array.sort(function(a, b) {
-            let aCount = parseInt(a.productCount);
-            let bCount = parseInt(b.productCount);
+            let aPrice = parseInt(a.cost);
+            let bPrice = parseInt(b.cost);
 
-            if ( aCount > bCount ){ return -1; }
-            if ( aCount < bCount ){ return 1; }
+            if ( aPrice < bPrice ){ return -1; }
+            if ( aPrice > bPrice ){ return 1; }
             return 0;
         });
-    }*/
+    }else if (criteria === ORDER_DESC_BY_PRICE){
+        result = array.sort(function(a, b) {
+            let aPrice = parseInt(a.cost);
+            let bPrice = parseInt(b.cost);
+
+            if ( aPrice > bPrice ){ return -1; }
+            if ( aPrice < bPrice ){ return 1; }
+            return 0;
+            
+        });
+    }else if (criteria === ORDER_RELEVANCIA){
+        result = array.sort(function(a, b) {
+            let aPrice = parseInt(a.soldCount);
+            let bPrice = parseInt(b.soldCount);
+
+            if ( aPrice > bPrice ){ return -1; }
+            if ( aPrice < bPrice ){ return 1; }
+            return 0;
+            
+        });
+    }
+
 
     return result;
 }
 
-function showProductsList(ProductsArray){
+function showProductsList(){
 
     let htmlContentToAppend = "";
     //Declaro variable string
-    for(let i = 0; i < ProductsArray.length; i++){
+    for(let i = 0; i < currentProductsArray.length; i++){
         //hago el for para recorrer el arreglo de productos
-        let producto = ProductsArray[i];
+        let producto = currentProductsArray[i];
         //Le asigno a producto cada elemento del arreglo de productos
         /*<a href="product-info.html" class="list-group-item list-group-item-action"> </a>*/
+        if (((minPrecio == undefined) || (minPrecio != undefined && parseInt(producto.cost) >= minPrecio)) &&
+        ((maxPrecio == undefined) || (maxPrecio != undefined && parseInt(producto.cost) <= maxPrecio))){
+            //Se evalua el precio de cada producto y si esta dentro del rango lo agrega al html
             htmlContentToAppend += `
             
                 <div class="row">
@@ -66,6 +94,8 @@ function showProductsList(ProductsArray){
             //Muestra los productos en una lista 
             //imagen - Nombre y descripcion
             //<small class="text-muted">`+ producto.currency +`: ` + producto.cost + `</small>
+        
+          }
         }
 
         document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
@@ -83,7 +113,7 @@ function showProductsList(ProductsArray){
         currentProductsArray = sortProducts(currentSortCriteria, currentProductsArray);
     
         //Muestro las categorías ordenadas
-        showProductsList(currentProductsArray);
+        showProductsList();
     }
 
 document.addEventListener("DOMContentLoaded", function (e) {
@@ -92,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
             sortAndShowProducts(ORDER_ASC_BY_NAME,resultObj.data)
         }
     });
-});
+//});
     document.getElementById("sortAsc").addEventListener("click", function(){
         sortAndShowProducts(ORDER_ASC_BY_NAME);
     });
@@ -101,6 +131,46 @@ document.addEventListener("DOMContentLoaded", function (e) {
         sortAndShowProducts(ORDER_DESC_BY_NAME);
     });
 
-    document.getElementById("sortByCount").addEventListener("click", function(){
-        sortAndShowProducts(ORDER_BY_PROD_COUNT);
+    document.getElementById("sortAscPrice").addEventListener("click", function(){
+        sortAndShowProducts(ORDER_ASC_BY_PRICE);
     });
+    document.getElementById("sortDescPrice").addEventListener("click", function(){
+        sortAndShowProducts(ORDER_DESC_BY_PRICE);
+
+    });
+    document.getElementById("sortRelevancia").addEventListener("click", function(){
+        sortAndShowProducts(ORDER_RELEVANCIA);
+
+    });
+    document.getElementById("clearRangeFilter").addEventListener("click", function(){
+        document.getElementById("rangeFilterPriceMin").value = "";
+        document.getElementById("rangeFilterPriceMax").value = "";
+
+        minPrecio = undefined;
+        maxPrecio = undefined;
+
+        showProductsList();
+    });
+    document.getElementById("rangeFilterPrice").addEventListener("click", function(){
+        //Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
+        //de productos por categoría.
+        minPrecio = document.getElementById("rangeFilterPriceMin").value;
+        maxPrecio = document.getElementById("rangeFilterPriceMax").value;
+
+        if ((minPrecio != undefined) && (minPrecio != "") && (parseInt(minPrecio)) >= 0){
+            minPrecio = parseInt(minPrecio);
+        }
+        else{
+            minPrecio = undefined;
+        }
+
+        if ((maxPrecio != undefined) && (maxPrecio != "") && (parseInt(maxPrecio)) >= 0){
+            maxPrecio = parseInt(maxPrecio);
+        }
+        else{
+            maxPrecio = undefined;
+        }
+
+        showProductsList();
+    });
+});

@@ -7,6 +7,7 @@ const PRODUCT_INFO_COMMENTS_URL = "https://japdevdep.github.io/ecommerce-api/pro
 const CART_INFO_URL = "https://japdevdep.github.io/ecommerce-api/cart/987.json";
 const CART_BUY_URL = "https://japdevdep.github.io/ecommerce-api/cart/buy.json";
 
+
 var showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
 }
@@ -39,6 +40,17 @@ var getJSONData = function(url){
         return result;
     });
 }
+function mostrar_Usuario() {//declaracion de funcion mostrar_Usuario
+  let usuario = localStorage.getItem("user");//creamos y le asignamos el nombre del usuario que teniamos guardado a la variable usuario
+  if ((usuario != undefined)&&(usuario !="") ) {//verificamos que la variable no este sin definir o vacia 
+    //si la variable tiene un nombre dentro la agregamos al html en la barra de navegacion
+    document.getElementById("usuario_Actual").innerHTML = usuario; 
+  }
+
+}
+
+mostrar_Usuario();//llamamos la funcion para poder mostrar el nombre de usuario en la barra de navegacion de nuestra web
+
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
