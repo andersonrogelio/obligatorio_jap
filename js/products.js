@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         minPrecio = undefined;
         maxPrecio = undefined;
 
-        showProductsList();
+        
         sortAndShowProducts(ORDER_ASC_BY_NAME);
     });
     document.getElementById("rangeFilterPrice").addEventListener("click", function(){
