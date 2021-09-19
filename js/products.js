@@ -74,7 +74,7 @@ function showProductsList(){
         ((maxPrecio == undefined) || (maxPrecio != undefined && parseInt(producto.cost) <= maxPrecio))){
             //Se evalua el precio de cada producto y si esta dentro del rango lo agrega al html
             htmlContentToAppend += `
-            
+            <a href="product-info.html" class="list-group-item list-group-item-action">
                 <div class="row">
                     <div class="col-3">
                         <img src="` + producto.imgSrc + `" alt="` + producto.description + `" class="img-thumbnail">
@@ -87,7 +87,7 @@ function showProductsList(){
                         <p class="mb-1">` + producto.description + `</p>
                     </div>
                 </div>
-            
+                </a>
             `
            
             //agrego el codigo que quiero que se muestre en el HTML
