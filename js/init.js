@@ -51,6 +51,11 @@ function mostrar_Usuario() {//declaracion de funcion mostrar_Usuario
 
 mostrar_Usuario();//llamamos la funcion para poder mostrar el nombre de usuario en la barra de navegacion de nuestra web
 
+function borrarUsuario(){//Esta funcion sirve para poder borrar el nombre de usuario guardado y asi simular el cierre de sesion
+  localStorage.removeItem("user");//elimina la "variable" user del localstorage
+  
+}
+
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los

@@ -4,6 +4,37 @@
 var infoProducts = {}; //declaro variables auxiliares
 var photos = [];
 var arrayComments = [];
+var products = [];
+/*
+"name": "Chevrolet Onix Joy",
+        "description": "Generación 2019, variedad de colores. Motor 1.0, ideal para ciudad.",
+        "cost": 13500,
+        "currency": "USD",
+        "imgSrc": "img/prod1.jpg",
+        "soldCount": 14
+*/
+
+
+function showRelatedProducts(arrayrelacted) {
+    htmlContentToAppend = "";
+    getJSONData(PRODUCTS_URL).then(function(resultObj){//obtengo la lista de productos
+        if (resultObj.status === "ok"){// verifico que la lista venga correcta
+            products = resultObj.data;//la guardo en infoProducts
+            for (let i = 0; i < arrayrelacted.length; i++) {
+                let product = products[arrayrelacted[i]];
+                htmlContentToAppend +=`
+                <div class="card product">
+                     <img src="`+ product.imgSrc +`">
+                     <h4>`+ product.name +`</h4>
+                   <p>`+ product.description +`</p>
+                   <a href="#">Leer más</a>
+                 </div>
+                `
+            };
+            document.getElementById("relatedProducts").innerHTML = htmlContentToAppend;
+        }
+    });
+}
 
 function showProductInfo(){ //definicion de funcion para mostrar descripcion del producto y sus imagenes
 let htmlContentToAppend = ""; //declaracion de variable que nos servira para mostrar la informacion  y imagenes en el html
@@ -47,6 +78,7 @@ htmlContentToAppend = ""; //vacio la variable para volverla a usar para agregar 
     }
     document.getElementById("itemimagenes").innerHTML = htmlContentToAppend //agrego las imagenes al carrousel
     htmlContentToAppend = "";
+    showRelatedProducts(infoProducts.relatedProducts);
 }
 
 //declaracion de variables que usare para poder mostrar la puntuacion de los comentarios 
