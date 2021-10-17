@@ -24,8 +24,8 @@ function updateProductoSubtotal(moneda){
     let i = 0;
     let result = 0;
     for (let article of productosCarrito){//recorro el arreglo de productos para saber el precio de ellos 
-        if (entrada[j].value<1) {//compruebo que no se ingreses un numero menor a 1 en el input
-            entrada[j].value = 1;
+        if (entrada[i].value<1) {//compruebo que no se ingreses un numero menor a 1 en el input
+            entrada[i].value = 1;
         }
         if (moneda === "UYU") {//verifico que tipo de moneda es la que se mostrara
             if (article.currency==="USD") {//hago conversion si es necesario
@@ -93,7 +93,7 @@ function showCarrito(moneda){
                 <td><img src="${article.src}" class = "img-fluid" style ="max-width:50px!important"></td>
                 <td class="align-middle">${article.name}</td>
                 <td class="align-middle">UYU  ${article.unitCost/40}</td>
-                <td class="align-middle"><input type="number" min ="1" value=${article.count} onchange="updateProductoSubtotal()" name="producto"></td>
+                <td class="align-middle"><input type="number" min ="1" value=${article.count} onchange="updateProductoSubtotal(moneda)" name="producto"></td>
                 <td class="align-middle" id="${j}">${(article.unitCost/40)*article.count}</td>
                 </tr>`
                 subtotal = subtotal + ((article.unitCost/40)*article.count);
@@ -104,7 +104,7 @@ function showCarrito(moneda){
               <td><img src="${article.src}" class = "img-fluid" style ="max-width:50px!important"></td>
               <td class="align-middle">${article.name}</td>
               <td class="align-middle">${article.currency} ${article.unitCost}</td>
-               <td class="align-middle"><input type="number" min ="1" value=${article.count} onchange="updateProductoSubtotal()" name="producto"></td>
+               <td class="align-middle"><input type="number" min ="1" value=${article.count} onchange="updateProductoSubtotal(moneda)" name="producto"></td>
                <td class="align-middle" id="${j}">${article.unitCost*article.count}</td>
                </tr>`
               subtotal = subtotal + (article.unitCost*article.count);
