@@ -73,23 +73,33 @@ function showProductsList(){
         if (((minPrecio == undefined) || (minPrecio != undefined && parseInt(producto.cost) >= minPrecio)) &&
         ((maxPrecio == undefined) || (maxPrecio != undefined && parseInt(producto.cost) <= maxPrecio))){
             //Se evalua el precio de cada producto y si esta dentro del rango lo agrega al html
-            htmlContentToAppend += `
-            <a href="product-info.html" class="list-group-item list-group-item-action">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="` + producto.imgSrc + `" alt="` + producto.description + `" class="img-thumbnail">
-                    </div>
-                    <div class="col">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">`+ producto.name +`</h4>
-                            <strong><p class="text-muted">`+ producto.currency +`: ` + producto.cost + `</p></strong>
-                        </div>
-                        <p class="mb-1">` + producto.description + `</p>
-                    </div>
-                </div>
-                </a>
+            htmlContentToAppend +=`
+            <div class="col-md-6 col-lg-4">
+             <div class="card  mr-auto ml-0">
+               <img src="`+ producto.imgSrc +`"  >
+                   <h4>`+ producto.name +`</h4>
+                  <p>`+ producto.description +`</p>
+                  <p>` + producto.currency +`: `+ producto.cost +`</p>
+                  <a href="product-info.html">Leer más</a>
+              </div>
+              </div>
             `
-           
+           /*
+               <a href="product-info.html" class="list-group-item list-group-item-action">
+        <div class="row">
+            <div class="col-3">
+                <img src="` + producto.imgSrc + `" alt="` + producto.description + `" class="img-thumbnail">
+            </div>
+            <div class="col">
+                <div class="d-flex w-100 justify-content-between">
+                    <h4 class="mb-1">`+ producto.name +`</h4>
+                    <strong><p class="text-muted">`+ producto.currency +`: ` + producto.cost + `</p></strong>
+                </div>
+                <p class="mb-1">` + producto.description + `</p>
+            </div>
+        </div>
+        </a>
+        */
             //agrego el codigo que quiero que se muestre en el HTML
             //Muestra los productos en una lista 
             //imagen - Nombre y descripcion
@@ -97,8 +107,8 @@ function showProductsList(){
         
           }
         }
-
-        document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
+        //document.getElementById("fila").innerHTML = htmlContentToAppend;
+        document.getElementById("filaProductos").innerHTML = htmlContentToAppend;
         //Lo agrego al HTML
     }
 

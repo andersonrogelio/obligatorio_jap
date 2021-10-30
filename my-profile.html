@@ -11,6 +11,7 @@
 
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
 
   <style>
     .bd-placeholder-img {
@@ -30,6 +31,7 @@
   </style>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  
   <link href="css/dropzone.css" rel="stylesheet">
 </head>
 
@@ -74,25 +76,63 @@
 
    <!-- <a class="navbar-brand " id="usuario_Actual" style="color: white;" href="#"></a>-->
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 6 (Fecha de entrega: 31/10/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+  <div class="container mt-5">
+    <div id="mensaje" >
+    </div>
+
+      <div class="d-flex justify-content-center align-items-center invisible " id="infoProfile"  >
+
+        <div id="photo">
+          
+            <a href="https://ibb.co/9Wym6r2"><img src="" id="photoprofile" class="mr-3"  alt="man-1" style="  width: 150px;  height: 150px;  border-radius: 50%;" crossorigin="anonymous" ></a>
+            <!--style="  width: 120px;  height: 120px;  border-radius: 50%;"-->
+          
+        </div>
+
+        <div id="datos">
+          <h4 id="name"></h4>
+          <p id="age"></p>
+          <p id="email"></p>
+          <p id="tel"></p>
+          <button type="button" class="btn btn-secondary" id="modificarDatos"><i class="fas fa-user-edit"></i> Modificar</button>
+          
+        </div>      
     </div>
   </div>
-  <footer class="text-muted bg-light">
-    <div class="container">
-      <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
-      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
-    </div>
-  </footer>
-  <div class="alert fade alert-success" role="alert" id="alertResult">
-    <span id="resultSpan"></span>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
+
+      <div class="pop-up" id="ventanamodal">
+        <div class="pop-up-wrap" id="sub-ventanamodal">
+          <div class="pop-up-titule d-flex justify-content-center" >
+            <h4>Datos a Modificar</h4>
+          </div>
+          <div class="datos d-flex flex-column justify-content-center align-items-center">
+            <form action="">
+              <div class=" d-flex">
+                <label for="nombre">Nombre:</label>
+                <input type="text" name="nombre" id="nombre">
+                <label for="apellido">Apellido:</label> 
+                <input type="text" name="apellido" id="apellido">
+              </div>
+              <div class="d-flex flex-column mt-2">
+                <label for="edad">Edad:
+                <input type="number" name="edad" id="edad" min="1">
+              </label>
+                <label for="correoelectronico">E-mail:
+                <input type="email" name="correoelectronico" id="correoelectronico">
+              </label>
+              <label for="numerocontacto">Número de contacto:
+                <input type="text" name="numerocontacto" id="numerocontacto">
+              </label>
+              </div>
+            </form>
+            <div class="d-flex">
+              <button type="button" class="btn btn-secondary " id="save"><i class="fas fa-save"></i> Guardar</button>
+              <button type="button" class="btn btn-secondary ml-2" id="cancel"><i class="fas fa-times-circle"></i> Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
   </div>
   <div id="spinner-wrapper">
     <div class="lds-ring">
