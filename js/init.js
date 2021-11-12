@@ -56,6 +56,24 @@ function borrarUsuario(){//Esta funcion sirve para poder borrar el nombre de usu
   
 }
 
+function showModal(mostrar){ //funcion que sirve para mostrar ventana pop-up que nos permite modificar los datos del usuario
+  //en funcion del parametro que le pasemos es si la funcion muestra o no la ventana
+  let ventana;
+  let subventana;
+  ventana =  document.getElementById("ventanamodal");//accedo a mi contenedor principal de la ventana que quiero mostrar para poder modificar las clases que contienen
+  subventana = document.getElementById("sub-ventanamodal");//accedo a mi subcontenedor para poder modificar las clases que contienen
+  if (mostrar === "si") {//bandera que me permite decidir que es lo que debe de hacer la funcion
+      //agrego la clase show que es lo que me permite mostrar mi ventana
+      ventana.className += " show";    
+      subventana.className += " show";
+  }else{
+      //le quito la clase show que es lo que me permite dejar de mostrar mi ventana
+      ventana.className = ventana.className.replace(" show","");    
+      
+      subventana.className = subventana.className.replace(" show","");
+      
+  }
+}
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los

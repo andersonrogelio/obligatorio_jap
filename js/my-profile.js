@@ -132,7 +132,7 @@ function showDatos(){//funcion que nos permite mostrar los datos en pantalla
     document.getElementById("tel").innerHTML = infoPerfil.number.toString();
 }
 
-function showModificarDatos(mostrar){ //funcion que sirve para mostrar ventana pop-up que nos permite modificar los datos del usuario
+/*function showModificarDatos(mostrar){ //funcion que sirve para mostrar ventana pop-up que nos permite modificar los datos del usuario
     //en funcion del parametro que le pasemos es si la funcion muestra o no la ventana
     let ventana;
     let subventana;
@@ -149,23 +149,23 @@ function showModificarDatos(mostrar){ //funcion que sirve para mostrar ventana p
         subventana.className = subventana.className.replace(" show","");
         
     }
-}
+}*/
 
 document.addEventListener("DOMContentLoaded", function (e) {
     haydatos();//vemos que hay que mostrar
     savePhoto();//mostramos y guardamos la foto
     document.getElementById("modificarDatos").addEventListener("click",function(){
-        showModificarDatos("si");//mostramos el pop-up
+        showModal("si");//mostramos el pop-up
         cargarinfo();//cargamos la informacion del usuario guardada si es que la hay
     });
     document.getElementById("cancel").addEventListener("click",function(){
-        showModificarDatos("no");//cerramos el pop-up
+        showModal("no");//cerramos el pop-up
     });
     document.getElementById("save").addEventListener("click", function(){
         obtenerInfo();//obtengo los datos ingresados 
         saveDatos();//guardo los datos ingresados
         limpiarCampos();//limpio los campos del pop-up
-        showModificarDatos("no");//cierro el pop-up
+        showModal("no");//cierro el pop-up
         showDatos();//muestro los datos modificados en pantalla 
     });
 });

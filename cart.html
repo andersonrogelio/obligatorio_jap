@@ -11,6 +11,8 @@
 
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
 
   <style>
     .bd-placeholder-img {
@@ -34,6 +36,7 @@
 </head>
 
 <body>
+  <!-- Menu de la pagina-->
   <nav class="navbar navbar-expand-lg navbar-dark site-header bg-dark">
           
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +48,7 @@
         <a class="nav-item  py-2 d-none d-md-inline-block" href="categories.html"  >Categorías</a>
         <a class="nav-item py-2 d-none d-md-inline-block " href="products.html">Productos</a>
         <a class="nav-item  py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <!--  <a class="nav-item  py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>-->
+      
       
     </div>
       <div class="navbar-nav d-block d-lg-none d-xl-none site-header">
@@ -53,7 +56,7 @@
         <a class="nav-item nav-link active" href="categories.html">Categorías</a>
         <a class="nav-item nav-link active" href="products.html">Productos</a>
         <a class="nav-item nav-link active" href="sell.html">Vender</a>
-       <!-- <a class="nav-item nav-link active" href="cart.html">Mi carrito</a>-->
+       
      
       </div>
     </div>
@@ -72,76 +75,92 @@
     </div>
 
 
-   <!-- <a class="navbar-brand " id="usuario_Actual" style="color: white;" href="#"></a>-->
+   
   </nav>
+
+  <!-- Contenido de la pagina -->
   <div class="container p-5">
-    <h4 class="text-center mr-auto mt-1 mb-4 ml-auto">Carrito de Compra</h4>
-    <div id="datosDeEnvio">
-      <h6 class=" mr-auto mb-1 ml-auto">Datos de envío:</h6>
-      <form action="">
+    <!--<h4 class="text-center mr-auto mt-1 mb-4 ml-auto">Carrito de Compra</h4> -->
+    <p class="h2 text-center mr-auto mt-1 mb-4 ml-auto ">Carrito de Compra</p>
+    <div class="row" id="datosDeEnvio">
+      <div class="col-6">
+        <!-- <h3 class=" mr-auto mb-1 ml-auto">Datos de envío:</h3> -->
+        <p class="h3 mr-auto mb-1 ml-auto">Datos de envío:</p>
+      <form class="needs-validation" novalidate action="">
         <fieldset>
           <legend>Dirección</legend>
           <div class=" ">
-            <div>
+            <div class="d-flex flex-column justify-content-center ">
               <label for="street">Calle:</label>
-              <input type="text" id="street" placeholder="">
+              <input type="text" id="street" placeholder="calle donde vive">
             
             <label for="number">Número de puerta:</label>
-              <input type="text" id="number" placeholder="">
-            </div>
-            <div class=" mt-2">
-              <label for="esquina">Esquina:
-                <input type="text" id="esquina" placeholder="">
-              </label>
+              <input type="text" id="number" placeholder="número de puerta">
+            
+              <label for="esquina">Esquina: </label>
+                <input type="text" id="esquina" placeholder="calle con la que hace cruz">
+              
             </div>
           </div> 
         </fieldset>
-        <fieldset>
-          <legend >Método de envío</legend>
-          <div class="row ">
-            <div class="form-group-col">
-              <input type="radio" id="envio1" name="envio" value="15">
-              <label for="envio1">Premium (2-5 días)</label><br>
-              <input type="radio" id="envio2" name="envio" value="7">
-              <label for="envio2">Express (5-8 días)</label><br>
-              <input type="radio" id="envio3" name="envio" value="5">
-              <label for="envio3">Standard (12 a 15 días)</label>
-            </div>
-              <div class="form-group-col ml-5 ">
-                <label for="pais">País:</label>
-                <input type="text" id="pais">
-              </div>
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>Método de pago:</legend>
-            <input type="radio" id="pago1" name="pago" value="15">
-            <label for="pago1" >Tarjeta de crédito</label><br>
-          <input type="radio" id="pago2" name="pago" value="7">
-            <label for="pago2">Transferencia bancaria</label><br>
-        </fieldset>
-        
+      </div>
 
-        
-      </form>
+        <div class="col-6" >
+          <fieldset>
+            <legend >Método de envío</legend>
+            <div class="col ">
+              <div class="form-group-col">
+                <input type="radio" id="envio1" name="envio" value="15" onchange="updateEnvio(this.value)">
+                <label for="envio1">Premium (2-5 días)</label><br>
+                <input type="radio" id="envio2" name="envio" value="7" onchange="updateEnvio(this.value)">
+                <label for="envio2">Express (5-8 días)</label><br>
+                <input type="radio" id="envio3" name="envio" value="5" onchange="updateEnvio(this.value)" checked>
+                <label for="envio3">Standard (12 a 15 días)</label>
+              </div>
+                <div class="form-group-col  ">
+                  <label for="pais">País:</label>
+                  <input type="text" id="pais" placeholder="país a donde se envía">
+                </div>
+            </div>
+          </fieldset>
         </div>
 
+      </form>
+        </div>
+        <div class="row" >
+          <div class="alert alert-warning alert-dismissible fade show invisible" role="alert" id="alert1" >
+            <strong>Faltan campos por completar, si no seleccionas otro método de envío de forma predeterminada sea el standard.</strong>
+            <button type="button" class="close"  aria-label="Close" id="cerraralert" onclick="showAlert('no','1');" > <!--data-dismiss="alert"-->
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <div class="row" >
+          <div class="alert alert-success alert-dismissible fade show invisible" role="alert" id="alert3" >
+            <strong>Compra realizada con éxito!!</strong>
+            <button type="button" class="close"  aria-label="Close" id="cerraralert" onclick="showAlert('no','3');" > <!--data-dismiss="alert"-->
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+<!--Estructura para mostrar los productos -->
     <div id="ProductsInCart" class="mt-3">
-      <h6>Artículos a comprar:</h6>
-      <div class="container">
+      <!-- <strong><h4>Artículos a comprar:</h4></strong> -->
+      <div class="">
         <div class="row">
+          <p class="h3">Artículos a comprar:</p>
             <div class="col text-right">
                 <div class="btn-group btn-group-toggle mb-4" data-toggle="buttons">
-                    <label class="btn btn-light active" id="monedaUYU" >
+                    <label class="btn btn-light active " name="labeloptions" id="monedaUYU" >
                         <input type="radio" name="options" autocomplete="off" value="UYU">UYU
                     </label>
-                    <label class="btn btn-light" id="monedaUSD" >
+                    <label class="btn btn-light" id="monedaUSD" name="labeloptions" >
                         <input type="radio" name="options" autocomplete="off" value="USD" >USD
                     </label>
                 </div>
             </div>
         </div>
-      <div  style="position: relative; width:auto; top: 0;">
+      <div class="row" style="position: relative; width:auto; top: 0;">
         <table class="table table-hover">
           <thead class="thead-dark">
             <tr>
@@ -150,6 +169,7 @@
               <th scope="col">Precio</th>
               <th scope="col">Cantidad</th>
               <th scope="col" >Subtotal</th>
+              <th></th>
             </tr>
           </thead>
           <tbody id="carrito">
@@ -160,6 +180,102 @@
       </div>
     </div  >
      </div>
+     <div class="d-flex justify-content-center align-items-center">
+     <button type="button" class="btn btn-secondary " id="pagar"><i class="fas fa-shopping-cart"></i> Pagar</button>
+    </div>
+
+
+
+    <!--Codigo para el modal del pago -->
+     <div class="pop-up" id="ventanamodal">
+      <div class="pop-up-wrap" id="sub-ventanamodal" >
+
+        <div class="pop-up-titule d-flex justify-content-center" >
+          <h4>Métodos de pago</h4>
+        </div>
+
+        <div class="row" >
+          <div class="alert alert-warning alert-dismissible fade show invisible" role="alert" id="alert2" >
+            <strong>Faltan campos por completar</strong>
+            <button type="button" class="close"  aria-label="Close" id="cerraralert" onclick="showAlert('no','2');" > 
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="datos d-flex flex-column justify-content-center align-items-center">
+          <form action="">
+            <input type="radio" id="credito" name="pago" value="Tarjeta de crédito" onchange="showIngresoDatosPago()">
+            <label for="credito">Tarjeta de crédito</label><br>
+            
+            <div id="datostarjeta" class="payment" style="display: none;">
+
+              <div class="form-group owner">
+                <label for="owner">Nombre:</label>
+                <input type="text" class="form-control" id="owner">
+            </div>
+            <div class="form-group CVV">
+                <label for="cvv">CVV</label>
+                <input type="text" class="form-control" id="cvv">
+            </div>
+            <div class="form-group" id="card-number-field">
+                <label for="cardNumber">Número de tarjeta:</label>
+                <input type="text" class="form-control" id="cardNumber">
+            </div>
+            <div class="form-group" id="expiration-date">
+                <label>Fecha de vencimiento:</label>
+                <select id="mes">
+                    <option value="01">Enero</option>
+                    <option value="02">Febrero </option>
+                    <option value="03">Marzo</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Mayo</option>
+                    <option value="06">Junio</option>
+                    <option value="07">Julio</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>
+                <select id="year">
+                    <option value="16"> 2021</option>
+                    <option value="17"> 2022</option>
+                    <option value="18"> 2023</option>
+                    <option value="19"> 2024</option>
+                    <option value="20"> 2025</option>
+                    <option value="21"> 2026</option>
+                </select>
+            </div>
+           <!-- <div class="form-group" id="credit_cards">
+                <img src="assets/images/visa.jpg" id="visa">
+                <img src="assets/images/mastercard.jpg" id="mastercard">
+                <img src="assets/images/amex.jpg" id="amex">
+            </div>
+            <div class="form-group" id="pay-now">
+                <button type="submit" class="btn btn-default" id="confirm-purchase">Confirm</button>
+            </div>-->
+        
+          </div>
+            <input type="radio" id="transferencia" name="pago" value="Transferencia bancaria" onchange="showIngresoDatosPago()">
+            <label for="transferencia"> Transferencia Bancaria</label>
+
+            <div id="datostransferencia" class="payment" style="display: none;">
+            <div class="form-group" >
+                <label for="cardNumber">Número de cuenta:</label>
+                <input type="text" class="form-control" id="accountNumber">
+            </div>
+            </div>
+
+          </form>
+        </div>
+          <div class="d-flex justify-content-center align-items-center ">
+            <button type="button" class="btn btn-secondary " id="confirmarpago"><i class="fas fa-check-circle"></i> Confirmar</button>
+            <button type="button" class="btn btn-secondary ml-2" id="cancelar"><i class="fas fa-times-circle"></i> Cancelar</button>
+          </div>
+        </div>
+
+  </div>
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
