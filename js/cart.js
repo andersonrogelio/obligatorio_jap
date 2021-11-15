@@ -5,37 +5,42 @@ var htmlToAppend = "";
 var moneda = "";
 var aux;
 
-function volverButton(){
-    aux.className +="active";
+
+//--------------------------------- estas dos funciones estan escritas para poder ayudar con la apariencia de la pagina
+function volverButton(){//funcion que permite vover a resaltar el boton de seleccion de tipo de moneda 
+    aux.className +="active";//le agrego la clase "active" al elemento que la tenia anterirmente antes de abrir el modal
 }
 
-function busquedaButton(){
-    let boton = document.getElementsByName("labeloptions");
+function busquedaButton(){//funcion que me permite dejar de resaltar el boton que te permite seleccionar el tipo de moneda en que se muestran los precios
+    let boton = document.getElementsByName("labeloptions");//seleccion los elementos del radiobutton
     let i = 0;
-    while (!boton[i].className.includes("active")){
+    while (!boton[i].className.includes("active")){//busco cual es el que tiene la clase "active"
         i += 1;
     };
-    aux = boton[i];
-    boton[i].className = boton[i].className.replace("active","");
-  //  boton[i].className = boton[i].replace("focus","");
+    aux = boton[i];//paso ese elemento a otra variable que me servira para luego volver a mostarlo
+    boton[i].className = boton[i].className.replace("active","");//le saco la clase "active"
 }
-function busquedaEnvio(){
-    let envios = document.getElementsByName("envio");
+
+//--------------------------------------------------------------------------------------------------------------------
+
+function busquedaEnvio(){//funcion que sirve para buscar cual es el tipo de envio seleccionado por el usuario
+    //observacion en caso de que el usuarion no seleccione el tipo de envio el que queda marcado de forma predeterminada es el standard
+    let envios = document.getElementsByName("envio");//busco todos los elementos del radiobutton que tienen la informacion del envio
     let i = 0;
-    while (!(envios[i].checked)) {
+    while (!(envios[i].checked)) {//busco cual es el que esta seleccionado
         i +=1;
     };
-    return envios[i].value;
+    return envios[i].value;//devuelvo su valor
 }
 
-function updateEnvio(porcentaje){
-    let costoenvio = (subtotal*porcentaje)/100;
-    document.getElementById("totalenvio").innerHTML = costoenvio.toString();
-    document.getElementById("total").innerHTML = (subtotal+costoenvio).toString();
+function updateEnvio(porcentaje){//funcion que calcula el porcentaje del costo de envio 
+    let costoenvio = (subtotal*porcentaje)/100;//realiza el calculo con el valor del total de productos a comprar
+    document.getElementById("totalenvio").innerHTML = costoenvio.toString();//lo muestra en el html el costo de envio
+    document.getElementById("total").innerHTML = (subtotal+costoenvio).toString();//muestra en el html el costo total
 }
 
 
-function mostrarSubtotal(){//creo el elemento de la tabla que contendra el costo de todos los productos del carrito
+function mostrarSubtotal(){//creo el elemento de la tabla que contendra el costo de todos los productos del carrito y del envio
     let html = "";
     html += `
     <tr>
@@ -152,62 +157,7 @@ function showCarrito(moneda){
                </tr>`
               subtotal = subtotal + (article.unitCost*article.count);
             } 
-                /*funcion para quitar elementos 
-                function borrarElemento(id){
-    productosCarrito.splice(id, 1);//quitar elemento del array de productos
-    showCarrito();//actualizar carrito
-    sumaSubtotales();//actualizar subtotal
-    modificarTotal();//actualizar costos
-}
-
                 
-                
-                
-                `
-                <tr>
-                <td><img src="${article.src}" class = "img-fluid" style ="max-width:50px!important"></td>
-                <td class="align-middle">${article.name}</td>
-                <td class="align-middle">UYU  ${article.unitCost*40}</td>
-                <td class="align-middle"><input type="number" min ="1" value=${article.count} onchange="updateProductoSubtotal(moneda)" name="producto"></td>
-                <td class="align-middle" id="${j}">${(article.unitCost*40)*article.count}</td>
-                </tr>`
-                subtotal = subtotal + ((article.unitCost*40)*article.count);
-            }else{
-                htmlToAppend += `
-                   <tr>
-                   <td><img src="${article.src}" class = "img-fluid" style ="max-width:50px!important"></td>
-                   <td class="align-middle">${article.name}</td>
-                   <td class="align-middle">${article.currency} ${article.unitCost}</td>
-                   <td class="align-middle"><input type="number" min ="1" value=${article.count} onchange="updateProductoSubtotal(moneda)" name="producto"></td>
-                  <td class="align-middle" id="${j}">${article.unitCost*article.count}</td>
-                   </tr>`
-                   subtotal = subtotal + (article.unitCost*article.count);
-                       }
-
-            
-        }else{
-            if (article.currency ==="UYU") {//con este if hago la conversion de moneda en caso de ser necesario
-                htmlToAppend += `
-                <tr>
-                <td><img src="${article.src}" class = "img-fluid" style ="max-width:50px!important"></td>
-                <td class="align-middle">${article.name}</td>
-                <td class="align-middle">UYU  ${article.unitCost/40}</td>
-                <td class="align-middle"><input type="number" min ="1" value=${article.count} onchange="updateProductoSubtotal(moneda)" name="producto"></td>
-                <td class="align-middle" id="${j}">${(article.unitCost/40)*article.count}</td>
-                </tr>`
-                subtotal = subtotal + ((article.unitCost/40)*article.count);
-            }
-            else{
-                htmlToAppend += `
-              <tr>
-              <td><img src="${article.src}" class = "img-fluid" style ="max-width:50px!important"></td>
-              <td class="align-middle">${article.name}</td>
-              <td class="align-middle">${article.currency} ${article.unitCost}</td>
-               <td class="align-middle"><input type="number" min ="1" value=${article.count} onchange="updateProductoSubtotal(moneda)" name="producto"></td>
-               <td class="align-middle" id="${j}">${article.unitCost*article.count}</td>
-               </tr>`
-              subtotal = subtotal + (article.unitCost*article.count);
-            }*/
         }
         j = j+1;
        
@@ -219,33 +169,35 @@ function showCarrito(moneda){
 
 }
 
-function showIngresoDatosPago() {
-    element = document.getElementById("datostarjeta");
-    check = document.getElementById("credito");
-    if (check.checked) {
-        element.style.display='block';
-        document.getElementById("datostransferencia").style.display = 'none';
+function showIngresoDatosPago() {//funcion que nos sirve para mostrar o ocultar los campos de entrada de datos para pagar
+    //esto dependiendo de la opcion que este seleccionada en el modal
+    element = document.getElementById("datostarjeta");//capturo el conteneor que deseo mostrar en caso de que se selecciones la opcion tarjeta de credito
+    check = document.getElementById("credito");//capturo el elemento del radiobutton que me permitira mostar los campos de la tarjeta de credito cuando se seleccione
+    if (check.checked) {//verifico si esta seleccionado el radio que corresponde a la tarjeta de credito
+        element.style.display='block';//muestro mi contenedor destinado a los datos de la tarjeta 
+        document.getElementById("datostransferencia").style.display = 'none';//oculto el contenedor que esta destinado a los datos para la transferencia 
     }
     else {
-        element.style.display='none';
-        document.getElementById("datostransferencia").style.display = 'block';
+        element.style.display='none';//oculto mi contenedor destinado a los datos de la tarjeta 
+        document.getElementById("datostransferencia").style.display = 'block';//muestro el contenedor que esta destinado a los datos para la transferencia 
     }
 }
 
-function showAlert(mostrar,cual){
+function showAlert(mostrar,cual){//funcion que me permite ocultar o mostrar los mensajes de alerta que tengo en la pagina
+    //la funcion recibe la accion a realizar en "mostrar" y en "cual" la terminacion del id del alert que quiero mostrar
     let mensaje = document.getElementById("alert"+cual);
-    if (mostrar === "si" ) {
+    if (mostrar === "si" ) {//en caso de que quiera mostrar solo le saca la clase "invisible" que es la que no lo muestra 
         mensaje.className = mensaje.className.replace("invisible","");
 
     }
-    if((mostrar === "no")&&(!mensaje.className.includes("invisible"))){
+    if((mostrar === "no")&&(!mensaje.className.includes("invisible"))){ //en caso de no querer mostrar el alert le agrego la clase "invisible" siempre y cuando ya no la tenga
 
         mensaje.className += "invisible";
         
     }
 }
 
-function simularEnvio(){
+function simularEnvio(){//funcion que simula el envio de datos borrando los campos que fueron llenados y mostrando un alerta que te confirma la compra realizada
      document.getElementById("street").value="";
      document.getElementById("number").value="";
     document.getElementById("esquina").value="";
@@ -254,6 +206,7 @@ function simularEnvio(){
     document.getElementById("cvv").value="";
     document.getElementById("cardNumber").value="";
     document.getElementById("accountNumber").value="";
+    showAlert("si","3");
 }
 
 function validacionInputsDireccion(){//funcion que verifica que los inputs no esten vacios para eso se utilica una bandera para saber cuales inputs va a validar
@@ -264,10 +217,10 @@ function validacionInputsDireccion(){//funcion que verifica que los inputs no es
     let pais = document.getElementById("pais").value;
 
 //verificacion de campos vacios referentes a la direcion de evio
-    //if ((bandera === "pagar") && ( (calle === "") || (numeropuerta === "")||(esquina ==="")||(pais === ""))) {
-        if ( (calle === "") || (numeropuerta === "")||(esquina ==="")||(pais === "")) {
+        if ( (calle === "") || (numeropuerta === "")||(esquina ==="")||(pais === "")) {//si alguno de los campos esta vacion muestro un mensaje
         showAlert("si","1");
-    }else{
+    }else{//si los campos no estan vacios abre el modal para introduccir los datos de pago y si llegara a pasar que el mensaje de que faltan datos esta en pantalla y el usuario
+        //no lo cerro lo cierro al abrir el modal
         
             showModal("si");
             busquedaButton();
@@ -287,20 +240,24 @@ function validacionInputsPago(){
    let check = document.getElementById("credito");
     if (check.checked) {
           //verificacion de campos vacios referentes a los datos de la tarjeta de credito
-         if ((nombrepropietario === "")||(codigoseguridad === "")||(numerotarjeta==="")){
+         if ((nombrepropietario === "")||(codigoseguridad === "")||(numerotarjeta==="")){//muestro un mensaje si hay campos vacios
                 
               showAlert("si","2");
-         }else{
+         }else{//si estan todos los campos llenos simulo envio y muestro mensaje que confirma la compra 
              simularEnvio();
              showAlert("no","2");
+             showModal("no");
+             showAlert("si","3");
          };
     }
-    else {
-        if (numerotransferencia === "") {
+    else {//verificacion de campos vacios referente a la transferencia bancaria
+        if (numerotransferencia === "") {//muestro un mensaje si hay campos vacios
             showAlert("si","2");
-        }else{
+        }else{//si estan todos los campos llenos simulo envio y muestro mensaje que confirma la compra 
             simularEnvio();
             showAlert("no","2");
+            showModal("no");
+            showAlert("si","3");
         }
 
     }
@@ -351,18 +308,11 @@ document.addEventListener("DOMContentLoaded", function(e){
 
     document.getElementById("confirmarpago").addEventListener("click",function(){
         validacionInputsPago();
-        showModal("no");
-        showAlert("si","3");
       
     });
     document.getElementById("cancelar").addEventListener("click",function(){
         showModal("no");
         volverButton();
     });
-
-    
-
-  /*  document.getElementById("credito").addEventListener("click", function(){
-        showIngresoDatosTarjeta();*/
 
 });
