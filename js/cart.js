@@ -216,7 +216,7 @@ function validacionInputsDireccion(){//funcion que verifica que los inputs no es
     let numeropuerta = document.getElementById("number").value;
     let esquina = document.getElementById("esquina").value;
     let pais = document.getElementById("pais").value;
-
+    showAlert("no","3");
 //verificacion de campos vacios referentes a la direcion de evio
         if ( (calle === "") || (numeropuerta === "")||(esquina ==="")||(pais === "")) {//si alguno de los campos esta vacion muestro un mensaje
         showAlert("si","1");
