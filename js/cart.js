@@ -19,6 +19,7 @@ function busquedaButton(){//funcion que me permite dejar de resaltar el boton qu
     };
     aux = boton[i];//paso ese elemento a otra variable que me servira para luego volver a mostarlo
     boton[i].className = boton[i].className.replace("active","");//le saco la clase "active"
+    
 }
 
 //--------------------------------------------------------------------------------------------------------------------
@@ -308,6 +309,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 
     document.getElementById("confirmarpago").addEventListener("click",function(){
         validacionInputsPago();
+        volverButton();
       
     });
     document.getElementById("cancelar").addEventListener("click",function(){
