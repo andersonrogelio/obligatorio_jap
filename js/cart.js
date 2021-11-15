@@ -249,6 +249,7 @@ function validacionInputsPago(){
              showAlert("no","2");
              showModal("no");
              showAlert("si","3");
+             volverButton();
          };
     }
     else {//verificacion de campos vacios referente a la transferencia bancaria
@@ -259,6 +260,7 @@ function validacionInputsPago(){
             showAlert("no","2");
             showModal("no");
             showAlert("si","3");
+            volverButton();
         }
 
     }
@@ -309,7 +311,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 
     document.getElementById("confirmarpago").addEventListener("click",function(){
         validacionInputsPago();
-        volverButton();
+        
       
     });
     document.getElementById("cancelar").addEventListener("click",function(){
