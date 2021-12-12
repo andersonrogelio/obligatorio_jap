@@ -4,6 +4,18 @@ var entrada = [];
 var htmlToAppend = "";
 var moneda = "";
 var aux;
+var datos_de_compra = {
+    usuario: localStorage.getItem('user'),
+    direccion:"",
+    esquina:"",
+    pais:"",
+    tipoenvio:"",
+    moneda:"",
+    costodeenvio:"",
+    articulos:[],
+    subtotal:"",
+    costototaldecompra:""
+};
 
 
 //--------------------------------- estas dos funciones estan escritas para poder ayudar con la apariencia de la pagina
@@ -31,6 +43,8 @@ function busquedaEnvio(){//funcion que sirve para buscar cual es el tipo de envi
     while (!(envios[i].checked)) {//busco cual es el que esta seleccionado
         i +=1;
     };
+    datos_de_compra.tipoenvio = envios[i].id + " es del "+ envios[i].value + "%";// LE AGREGUE ESTA LINEA DE CODIGO PARA ASI PODER OBTENER EL TIPO DE ENVIO SELECCIONADO QUE VOY A GUARDAR EN EL OBJETO QUE SERVIRA PARA GUARDAR LA INFO SOBRE EL ENVIO DE FORMA LOCAL 
+
     return envios[i].value;//devuelvo su valor
 }
 
@@ -38,6 +52,9 @@ function updateEnvio(porcentaje){//funcion que calcula el porcentaje del costo d
     let costoenvio = (subtotal*porcentaje)/100;//realiza el calculo con el valor del total de productos a comprar
     document.getElementById("totalenvio").innerHTML = costoenvio.toString();//lo muestra en el html el costo de envio
     document.getElementById("total").innerHTML = (subtotal+costoenvio).toString();//muestra en el html el costo total
+    datos_de_compra.costodeenvio = costoenvio;
+    datos_de_compra.subtotal = subtotal;
+    datos_de_compra.costototaldecompra = subtotal+costoenvio;
 }
 
 
@@ -119,6 +136,7 @@ function showCarrito(moneda){
                 <td class="align-middle"><button type="button" class="btn btn-secondary " id="${j +"e"}" onclick="borrarProducto(this.id)"> Eliminar</button></td>
                 </tr>`
                 subtotal = subtotal + ((article.unitCost*40)*article.count);
+                datos_de_compra.articulos[j] = article.name +" "+ (article.unitCost*40);
             }else{
                 htmlToAppend += `
                    <tr>
@@ -130,7 +148,8 @@ function showCarrito(moneda){
                   <td class="align-middle"><button type="button" class="btn btn-secondary " id="${j +"e"}" onclick="borrarProducto(this.id)"> Eliminar</button></td>
                    </tr>`
                    subtotal = subtotal + (article.unitCost*article.count);
-                       }
+                   datos_de_compra.articulos[j] = article.name +" "+ article.unitCost;
+                 }
 
             
         }else{
@@ -145,6 +164,7 @@ function showCarrito(moneda){
                 <td class="align-middle"><button type="button" class="btn btn-secondary " id="${j +"e"}" onclick="borrarProducto(this.id)"> Eliminar</button></td>
                 </tr>`
                 subtotal = subtotal + ((article.unitCost/40)*article.count);
+                datos_de_compra.articulos[j] = article.name +" "+ (article.unitCost/40);
             }
             else{
                 htmlToAppend += `
@@ -157,6 +177,7 @@ function showCarrito(moneda){
                <td class="align-middle"><button type="button" class="btn btn-secondary " id="${j +"e"}" onclick="borrarProducto(this.id)"> Eliminar</button></td>
                </tr>`
               subtotal = subtotal + (article.unitCost*article.count);
+              datos_de_compra.articulos[j] = article.name +" "+ article.unitCost;
             } 
                 
         }
@@ -225,7 +246,11 @@ function validacionInputsDireccion(){//funcion que verifica que los inputs no es
         
             showModal("si");
             busquedaButton();
-            showAlert("no","1");   
+            showAlert("no","1");
+            datos_de_compra.direccion = calle + " " + numeropuerta;
+            datos_de_compra.esquina = esquina;
+            datos_de_compra.pais = pais;
+            //console.log(datos_de_compra);
         
     };
 };
@@ -250,6 +275,11 @@ function validacionInputsPago(){
              showModal("no");
              showAlert("si","3");
              volverButton();
+             datos_de_compra.moneda = moneda;
+             datos_de_compra.formapago = "Tarjetas de Crédito";
+             datos_de_compra.propietario = nombrepropietario;
+             datos_de_compra.cod_seguridad = codigoseguridad;
+             datos_de_compra.num_tarjeta = numerotarjeta;
          };
     }
     else {//verificacion de campos vacios referente a la transferencia bancaria
@@ -261,6 +291,9 @@ function validacionInputsPago(){
             showModal("no");
             showAlert("si","3");
             volverButton();
+            datos_de_compra.moneda = moneda;
+            datos_de_compra.formapago = "Transferencia";
+            datos_de_compra.num_cuenta = numerotransferencia;
         }
 
     }
@@ -311,10 +344,20 @@ document.addEventListener("DOMContentLoaded", function(e){
 
     document.getElementById("confirmarpago").addEventListener("click",function(){
         validacionInputsPago();
+        console.log(datos_de_compra);
+        fetch("http://127.0.0.1:8000/compras_realizadas",{
+            method: 'POST', // or 'PUT'
+            body: JSON.stringify(datos_de_compra), // data can be `string` or {object}!
+            headers:{
+              'Content-Type': 'application/json'
+            }
+          }).then(res => res.json())
+          .then(res=>console.log(res))
         
       
     });
     document.getElementById("cancelar").addEventListener("click",function(){
+        
         showModal("no");
         volverButton();
     });

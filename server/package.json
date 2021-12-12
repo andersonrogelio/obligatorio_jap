@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  },
+  "name": "obligatorio_jap",
+  "version": "1.0.0",
+  "description": "servidor local para el obligatorio del jap - entrega 8",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "servidor"
+  ],
+  "author": "anderson_lopez-50169341",
+  "license": "ISC"
+}

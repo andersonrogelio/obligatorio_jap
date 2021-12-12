@@ -20,7 +20,7 @@ function showContenedorDatos(){//funcion que me ayuda a cerrar el mensaje que pi
     }
 
 }
-
+/*
 function savePhoto(){ //funcion que nos permite guardar la foto el codigo ya esta comentado y lo deje tal cual nos lo mostraron mas que nada por comodidad
  //hay cosas que creo que para nuestro caso es inecesarias como por ejemplo la fecha 
 // localStorage with image
@@ -68,7 +68,7 @@ else {
     // Use image from localStorage
     photoprofile.setAttribute("src", storageFiles.photoprofile);
 }
-}
+}*/
 function haydatos(){ //funcion que nos permite saber si hay que introducir los datos por primera vez o mostrarlos en pantalla
     let html=""; //variable que nos servira para mostrar en la pagina el mensaje para que el usuario introduzca sus datos por primera vez en ser necesario
     if (localStorage.getItem("datos") === null) {//verificamos que no tengamos datos guardados en el localstorage
@@ -153,7 +153,7 @@ function showDatos(){//funcion que nos permite mostrar los datos en pantalla
 
 document.addEventListener("DOMContentLoaded", function (e) {
     haydatos();//vemos que hay que mostrar
-    savePhoto();//mostramos y guardamos la foto
+    //savePhoto();//mostramos y guardamos la foto
     document.getElementById("modificarDatos").addEventListener("click",function(){
         showModal("si");//mostramos el pop-up
         cargarinfo();//cargamos la informacion del usuario guardada si es que la hay

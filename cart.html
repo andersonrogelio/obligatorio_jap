@@ -86,7 +86,7 @@
       <div class="col-6">
         <!-- <h3 class=" mr-auto mb-1 ml-auto">Datos de envío:</h3> -->
         <p class="h3 mr-auto mb-1 ml-auto">Datos de envío:</p>
-      <form class="needs-validation" novalidate action="">
+      <form  class="needs-validation" novalidate action="" >
         <fieldset>
           <legend>Dirección</legend>
           <div class=" ">
@@ -110,12 +110,12 @@
             <legend >Método de envío</legend>
             <div class="col ">
               <div class="form-group-col">
-                <input type="radio" id="envio1" name="envio" value="15" onchange="updateEnvio(this.value)">
-                <label for="envio1">Premium (2-5 días)</label><br>
-                <input type="radio" id="envio2" name="envio" value="7" onchange="updateEnvio(this.value)">
-                <label for="envio2">Express (5-8 días)</label><br>
-                <input type="radio" id="envio3" name="envio" value="5" onchange="updateEnvio(this.value)" checked>
-                <label for="envio3">Standard (12 a 15 días)</label>
+                <input type="radio" id="premium" name="envio" value="15" onchange="updateEnvio(this.value)">
+                <label for="premium">Premium (2-5 días)</label><br>
+                <input type="radio" id="express" name="envio" value="7" onchange="updateEnvio(this.value)">
+                <label for="express">Express (5-8 días)</label><br>
+                <input type="radio" id="standard" name="envio" value="5" onchange="updateEnvio(this.value)" checked>
+                <label for="standard">Standard (12 a 15 días)</label>
               </div>
                 <div class="form-group-col  ">
                   <label for="pais">País:</label>

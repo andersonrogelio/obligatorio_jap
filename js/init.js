@@ -1,3 +1,4 @@
+// nueva direccion para acceder al servidor local http://127.0.0.1:8000/ esta es la raiz
 const CATEGORIES_URL = "https://japdevdep.github.io/ecommerce-api/category/all.json";
 const PUBLISH_PRODUCT_URL = "https://japdevdep.github.io/ecommerce-api/product/publish.json";
 const CATEGORY_INFO_URL = "https://japdevdep.github.io/ecommerce-api/category/1234.json";
@@ -7,6 +8,15 @@ const PRODUCT_INFO_COMMENTS_URL = "https://japdevdep.github.io/ecommerce-api/pro
 const CART_INFO_URL = "https://japdevdep.github.io/ecommerce-api/cart/987.json";
 const CART_BUY_URL = "https://japdevdep.github.io/ecommerce-api/cart/buy.json";
 
+
+/*const CATEGORIES_URL = "http://127.0.0.1:8000/category";
+const PUBLISH_PRODUCT_URL = "http://127.0.0.1:8000//publicar_product";
+const CATEGORY_INFO_URL = "http://127.0.0.1:8000//category_info";
+const PRODUCTS_URL = "http://127.0.0.1:8000/products";
+const PRODUCT_INFO_URL = "http://127.0.0.1:8000/product_info";
+const PRODUCT_INFO_COMMENTS_URL = "http://127.0.0.1:8000/product_info_comments";
+const CART_INFO_URL = "http://127.0.0.1:8000/cart_info";
+const CART_BUY_URL = "http://127.0.0.1:8000/cart_buy"*/
 
 var showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
